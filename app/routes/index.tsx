@@ -33,7 +33,10 @@ export const action: ActionFunction = async ({ request, context }) => {
     email: String(loginEmail),
     password: String(loginPassword),
   });
-  response.headers.append("set-cookie", "; HttpOnly");
+  response.headers.set(
+    "set-cookie",
+    response.headers.get("set-cookie")! + "; HttpOnly"
+  );
   console.log(response.headers);
   return json(
     { data, error },
